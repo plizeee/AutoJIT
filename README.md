@@ -7,17 +7,17 @@
 4. Follow the Mac instructions for what to enter in the fields
 
 ## On your Mac:
-1. Download `placeholder.xcodeproj` and `AutoJIT.applescript` on your Mac.
+1. Download `Placeholder.xcodeproj` and `AutoJIT.applescript` on your Mac.
 2. Right-click `AutoJIT.applescript`, hold the option key and click **Copy "AutoJIT.applescript" as Pathname** and paste the text somewhere. Enter that text as the value for `path` in the shortcut.
 3. Locate Hostname:
-    - Open Terminal and use the command ``hostname`` and enter that as the value for `host` in the shortcut.
+    - Open Terminal and use the command `hostname` and enter that as the value for `host` in the shortcut.
 4. Locate user:
-    - Open Terminal and use the command ``whoami`` and enter that as the value for ``user`` in the shortcut.
+    - Open Terminal and use the command `whoami` and enter that as the value for `user` in the shortcut.
 5. Enable SSH:
     - System Settings > General > Sharing > Turn on Remote Login
 
 
-## Open `placeholder.xcodeproj`
+## Open `Placeholder.xcodeproj`
 
 ## Download iOS SDK:
 1. Xcode > Settings... > iOS 17.x (7.35gb)
