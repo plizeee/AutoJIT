@@ -1,37 +1,4 @@
-# AutoJIT Setup
-
-## On your iOS device:
-1. Download `AutoJIT.shortcut` on your iOS device
-2. Edit the shortcut
-3. Add your Mac password in the password field for both SSH actions
-4. Follow the Mac instructions for what to enter in the fields
-
-## On your Mac:
-1. Download `Placeholder.xcodeproj` and `AutoJIT.applescript` on your Mac.
-2. Right-click `AutoJIT.applescript`, hold the option key and click **Copy "AutoJIT.applescript" as Pathname** and paste the text somewhere. Enter that text as the value for `path` in the shortcut.
-3. Locate Hostname:
-    - Open Terminal and use the command `hostname` and enter that as the value for `host` in the shortcut.
-4. Locate user:
-    - Open Terminal and use the command `whoami` and enter that as the value for `user` in the shortcut.
-5. Enable SSH:
-    - System Settings > General > Sharing > Turn on Remote Login
-
-
-## Open `Placeholder.xcodeproj`
-
-## Download iOS SDK:
-1. Xcode > Settings... > iOS 17.x (7.35gb)
-    - Select whatever version your device is running.
-    - When installing Xcode for the first time, you can specify to download the iOS SDK.
-
-2. Plug in your device to your Mac, open Finder and select your device under Locations. Scroll down to Options and make sure to enable **Show this iPhone when on Wi-Fi**
-
-3. Go to into Xcode > Window > Devices and Simulators, and make sure your device is paired. If you unplug your device, you should see an internet icon (looks kinda like this: :globe_with_meridians:)
-
-Once your SDK is done downloading, test if local JIT works correctly.
-1. Open Sudachi on your iOS device, then in Xcode, select Debug > Select Process by PID or Name, then enter `Sudachi`. Wait about 30 seconds for JIT to enable (the app should freeze for a few seconds once it's enabled). Test a game to make sure it's working properly. Close the app.
-
-Test out the shortcut. You can add it to your Home Screen as an app with a custom icon, if you'd like.
+# AutoJIT
 
 ## What is AutoJIT?
 - AutoJIT is an automation tool that enables MacOS users to wirelessly enable JIT over local network, without manually interacting with Xcode every single time.
@@ -58,6 +25,43 @@ Test out the shortcut. You can add it to your Home Screen as an app with a custo
 - Add a `Text` action (within the new menu item) and enter the name of the app
 - Add a `Set Variable` (within the new menu item) action, enter `App` as the variable name
 - Select `Input`, then `Select Variable`, then select the text block you just added
+
+# Setup
+
+## On your iOS device:
+1. Download `AutoJIT.shortcut` on your iOS device
+2. Edit the shortcut
+3. Add your Mac password in the password field for both SSH actions
+4. Follow the Mac instructions for what to enter in the fields
+
+## On your Mac:
+1. Download `Placeholder.xcodeproj` and `AutoJIT.applescript` on your Mac.
+2. Right-click `AutoJIT.applescript`, hold the option key and click **Copy "AutoJIT.applescript" as Pathname** and paste the text somewhere. Enter that text as the value for `path` in the shortcut.
+3. Locate Hostname:
+    - Open Terminal and use the command `hostname` and enter that as the value for `host` in the shortcut.
+4. Locate user:
+    - Open Terminal and use the command `whoami` and enter that as the value for `user` in the shortcut.
+5. Enable SSH:
+    - System Settings > General > Sharing > Turn on Remote Login
+
+
+## Open `Placeholder.xcodeproj`
+- If if prompts you to trust the project, click `Trust`
+- This is just a placeholder project so that we can attach the debugger to the app.
+- You could create your own empty project, but this might be easier.
+## Download iOS SDK:
+1. Xcode > Settings... > iOS 17.x (7.35gb)
+    - Select whatever version your device is running.
+    - When installing Xcode for the first time, you can specify to download the iOS SDK.
+
+2. Plug in your device to your Mac, open Finder and select your device under Locations. Scroll down to Options and make sure to enable **Show this iPhone when on Wi-Fi**
+
+3. Go to into Xcode > Window > Devices and Simulators, and make sure your device is paired. If you unplug your device, you should see an internet icon (looks kinda like this: :globe_with_meridians:)
+
+Once your SDK is done downloading, test if local JIT works correctly.
+1. Open Sudachi on your iOS device, then in Xcode, select Debug > Select Process by PID or Name, then enter `Sudachi`. Wait about 30 seconds for JIT to enable (the app should freeze for a few seconds once it's enabled). Test a game to make sure it's working properly. Close the app.
+
+Test out the shortcut. You can add it to your Home Screen as an app with a custom icon, if you'd like.
 
 # Troubleshooting
 
