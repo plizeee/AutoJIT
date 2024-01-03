@@ -77,3 +77,15 @@ Test out the shortcut. You can add it to your Home Screen as an app with a custo
 
 ## The app is frozen forever
 - This shouldn't be a frequent issue, just kill the app and run the shortcut again
+
+## It says "JIT enabled" but it's not working
+- This is a known issue, but just run the shortcut again and it should work
+
+## AutoJIT.applescript execution error: System Events got an error: Can't get window 1 of process "Xcode". Invalid index
+- This seems to happen when Xcode is not the active window.
+- This can probably be fixed fairly easily soon, but for now, just make sure Xcode is the active window when you run, if you get this error.
+
+## Phone cannot leave the app
+- This can usually be fixed by manually detaching the debugger from the app (Xcode > Debug > Detach from [process name])
+- In the extremely rare event that your device refuses to leave the app and Xcode is not reporting the app being attached, you can force restart your device (Quickly press and release Volume Up, then press and release Volume Down, then hold the power button until the Apple logo appears)
+- I believe this issue is caused by the app being in a limbo state where it thinks the debugger is attached and paused, but the debugger is not actually attached.
