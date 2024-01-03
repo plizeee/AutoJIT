@@ -46,7 +46,7 @@
 
 
 ## Open `Placeholder.xcodeproj`
-- If if prompts you to trust the project, click `Trust`
+- If it prompts you to trust the project, click `Trust`
 - This is just a placeholder project so that we can attach the debugger to the app.
 - You could create your own empty project, but this might be easier.
 ## Download iOS SDK:
