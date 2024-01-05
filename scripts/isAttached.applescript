@@ -17,7 +17,7 @@ on isAttached(processName)
                     
                     if (count of staticTexts) ³ 1 then
                         -- if this this is the correct row, the first static text will be the process name
-                        -- and if the above is true, the second static text will either be the PID or Waiting to Attach (not needed here, but good to know)
+                        -- and if the above is true, the second static text will either be the PID or Waiting to Attach (we don't check for that since it's not needed here, but good to know)
                         if (value of item 1 of staticTexts as text) is processName then
                             return true
                         end if
