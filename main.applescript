@@ -49,13 +49,13 @@ on run argv
     log "isAttached: " & isAttached & " \nisWaiting: " & isWaiting
 
     -- If the app is not attached or waiting for attach, attach to the process
-    if isAttached is equal to "false" and isWaiting is equal to "false" then
+    if not isAttached and not isWaiting then
         log "Attaching to process"
         attachToProcess(processName)
-    else if isAttached is equal to "true" then
+    else if isAttached then
         log "Detaching from process"
         detachFromProcess(processName)
-    else if isWaiting is equal to "true" then
+    else if isWaiting then
         log "Selecting process"
         selectProcess(processName)
     end if
@@ -79,14 +79,18 @@ end escapeQuotes
 on isAttached(processName)
     -- Get the result of the isAttached.applescript script
     set isAttached to (do shell script "osascript " & quoted form of POSIX path of isAttachedFile & " " & processName)
-    return isAttached
+
+    -- returns a string because of the way osascript works
+    return isAttached is equal to "true"
 end isAttached
 
 -- Check if the app is waiting for attach
 on isWaiting(processName)
     -- Get the result of the isWaiting.applescript script
     set isWaiting to (do shell script "osascript " & quoted form of POSIX path of isWaitingFile & " " & processName)
-    return isWaiting
+
+    -- returns a string because of the way osascript works
+    return isWaiting is equal to "true"
 end isWaiting
 
 -- Select the device we want to attach to
