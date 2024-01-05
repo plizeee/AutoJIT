@@ -13,7 +13,7 @@ on selectAttachToProcess()
             end tell
         end tell
     end tell
-end selectDebug
+end selectAttachToProcess
 
 -- select the attach button in the dialog
 on selectAttachButton(argv)
@@ -30,6 +30,7 @@ on selectAttachButton(argv)
 end selectAttachToProcess
 
 on run argv
+    activate application "Xcode"
     selectAttachToProcess()
     selectAttachButton(argv)
 end run
