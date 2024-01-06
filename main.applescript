@@ -43,26 +43,80 @@ on run argv
     -- Select the device we want to attach to
     selectDevice(deviceName)
 
-    set isAttached to isAttached(processName)
-    set isWaiting to isWaiting(processName)
+    set isProcessAttached to isAttached(processName)
+    set isProcessWaiting to isWaiting(processName)
 
-    log "isAttached: " & isAttached & " \nisWaiting: " & isWaiting
+    log "isAttached: " & isProcessAttached & " \nisWaiting: " & isProcessWaiting
 
-    -- If the app is not attached or waiting for attach, attach to the process
-    if not isAttached and not isWaiting then
-        log "Attaching to process"
+    
+    if isProcessWaiting then
+        -- waitUntilAttached(processName, 15)
+        -- we don't need to update isProcessWaiting because we're not using it again
+        set isProcessAttached to waitUntilAttached(processName, 30)
+    end if
+
+    -- TODO rename isAttached to isAttachedOrWaiting or change the logic to be more clear
+    -- Check if the app is detached
+    if not isProcessAttached then
+        log processName & " is not attached"
+
+        -- Attach to the process
         attachToProcess(processName)
-    else if isAttached then
-        log "Detaching from process"
-        detachFromProcess(processName)
-    else if isWaiting then
-        log "Selecting process"
+
+        -- Wait until the app is attached
+        set isProcessAttached to waitUntilAttached(processName, 30)
+    end if
+
+    -- Check if the app is attached
+    if isProcessAttached then
+        log processName & " is attached"
+
+        -- Select the process
         selectProcess(processName)
+
+        -- Detach from the process
+        detachFromProcess(processName)
+
+        -- Wait until the app is detached
+        set isProcessAttached to waitUntilDetached(processName, 30) -- returns true if we didn't time out
+
+        log processName & " is detached: " & isProcessAttached
     end if
 
     -- Return the result of the script
     return "success"
 end run
+
+on waitUntilAttached(processName, timeoutSeconds)
+    log "Waiting for " & processName & " to attach"
+    -- set isProcessWaiting to true
+    set isProcessAttached to false
+    log "before repeat"
+    repeat until isProcessAttached or timeoutSeconds is equal to 0
+        log "Waiting for " & processName & " to attach... " & timeoutSeconds & " seconds remaining"
+        -- set isProcessAttached to isAttached(processName)
+        -- we need to do a shell command directly because applescript has very limited scope
+        -- set isProcessWaiting to (do shell script "osascript " & quoted form of POSIX path of isWaitingFile & " " & processName) is equal to "true"
+        set isProcessAttached to (do shell script "osascript " & quoted form of POSIX path of isAttachedFile & " " & processName) is equal to "true"
+        delay 1
+        set timeoutSeconds to timeoutSeconds - 1
+    end repeat
+
+    return timeoutSeconds is not equal to 0 -- return true if we didn't time out
+end waitUntilAttached
+
+on waitUntilDetached(processName, timeoutSeconds)
+    log "Waiting for " & processName & " to detach"
+    set isProcessAttached to true
+    repeat until not isProcessAttached or timeoutSeconds is equal to 0
+        set isProcessAttached to (do shell script "osascript " & quoted form of POSIX path of isAttachedFile & " " & processName) is equal to "true"
+        log "Waiting for " & processName & " to detach... " & timeoutSeconds & " seconds remaining"
+        delay 1
+        set timeoutSeconds to timeoutSeconds - 1
+    end repeat
+
+    return timeoutSeconds is not equal to 0 -- return true if we didn't time out
+end waitUntilDetached
 
 -- TODO move this to utils
 on escapeQuotes(inputText)
