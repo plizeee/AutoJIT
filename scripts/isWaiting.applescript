@@ -1,4 +1,7 @@
 on isWaiting(processName)
+    set isWaiting to true
+    set doesProcessExist to false
+
     tell application "System Events"
         tell process "Xcode"
             -- this is the list of all elements in the debug navigator
@@ -14,21 +17,20 @@ on isWaiting(processName)
                 repeat with aRow in myRows
                     set firstCell to first UI element of aRow -- each row has only one cell
                     set staticTexts to every static text of firstCell -- cells can have multiple static texts
-                    
-                    if (count of staticTexts) ³ 2 then
-                        -- if this this is the correct row, the first static text will be the process name
-                        -- and if the above is true, the second static text will either be the PID or Waiting to Attach
-                        if (value of item 1 of staticTexts as text) is processName then
-                            if (value of item 2 of staticTexts as text) is "Waiting to Attach" then
-                                return true
-                            end if
-                        end if
+
+                    set item1 to value of item 1 of staticTexts as text
+
+                    if item1 is processName then
+                        set doesProcessExist to true
+                    else if doesProcessExist and item1 is "CPU" then
+                        -- display notification item1 with title "Xcode"
+                        return false
                     end if
                 end repeat
             end repeat
         end tell
     end tell
-    return false
+    return doesProcessExist
 end isWaiting
 
 -- Let's run the script with a process name as an argument
