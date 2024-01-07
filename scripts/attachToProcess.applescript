@@ -2,6 +2,7 @@
 
 -- Select Debug > Attach to Process by PID or Name…
 on selectAttachToProcess()
+    activate application "Xcode"
     tell application "System Events"
         tell process "Xcode"
             tell menu bar 1
@@ -30,7 +31,6 @@ on selectAttachButton(argv)
 end selectAttachToProcess
 
 on run argv
-    activate application "Xcode"
     selectAttachToProcess()
     selectAttachButton(argv)
 end run
