@@ -1,12 +1,10 @@
 -- TODO AppleScript
 -- TODO rename isAttached and isWaiting functions/files to better reflect what they do
 -- TODO add checks to make sure we don't get stuck in dialog boxes
--- TODO add checks to make sure the xcode window is in focus when we need it to be (sometimes it's fine to be in the background, but sometimes it's not)
 -- TODO add script to navigate to the debug navigator (the spray paint can icon)
 
 -- TODO Shortuts
 -- TODO once the app is open, check if we're still waiting to attach. If we're still waiting after a few seconds, then we need to let them know that they have to kill the app
--- TODO once it's killed, we should re-open it and it should immediately attach
 
 global isAttachedFile, isWaitingFile, selectDeviceFile, attachToProcessFile, detachFromProcessFile, selectProcessFile
 
@@ -61,8 +59,6 @@ on run argv
 
     log "isAttached: " & isProcessAttached & " \nisWaiting: " & isProcessWaiting
 
-
-    --TODO isProcessWaiting is true even when the app is not waiting for attach 
     -- Check if the app is waiting for attach
     -- This specifically means if the app is able to be detached
     if isProcessWaiting then
