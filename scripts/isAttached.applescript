@@ -6,7 +6,8 @@ on isAttached(processName)
             -- this is the list of all elements in the debug navigator
             -- we need to iterate through each one because they aren't labeled at this level
             -- the items here could include the elements containing the process name/PID, CPU, Memory, Energy Impact, Disk, and Network
-            set debugNavigatorOutlines to every outline of scroll area 1 of group 1 of window "Placeholder Ñ Placeholder.xcodeproj"
+            -- set debugNavigatorOutlines to every outline of scroll area 1 of group 1 of window "Placeholder Ñ Placeholder.xcodeproj"
+            set debugNavigatorOutlines to every outline of scroll area 1 of group 1 of window 1
             
             -- Iterate through each outline
             repeat with anOutline in debugNavigatorOutlines
