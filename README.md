@@ -114,3 +114,6 @@ Test out the shortcut. You can add it to your Home Screen as an app with a custo
 - This can usually be fixed by manually detaching the debugger from the app (Xcode > Debug > Detach from [process name])
 - In the extremely rare event that your device refuses to leave the app and Xcode is not reporting the app being attached, you can force restart your device (Quickly press and release Volume Up, then press and release Volume Down, then hold the power button until the Apple logo appears)
 - I believe this issue is caused by the app being in a limbo state where it thinks the debugger is attached and paused, but the debugger is not actually attached.
+
+## Run Script Over SSH could not connect to the SSH server.
+- Try using the local IP address of your Mac instead (See the Setup section for steps)
