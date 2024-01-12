@@ -1,4 +1,6 @@
 on isAttached(processName)
+    activate application "Xcode"
+    delay 1 -- wait for Xcode to activate
     tell application "System Events"
         tell process "Xcode"
             -- this is the list of all elements in the debug navigator
