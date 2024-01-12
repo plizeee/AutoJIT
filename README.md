@@ -2,23 +2,28 @@
 
 ## What is AutoJIT?
 - AutoJIT is an automation tool that enables MacOS users to wirelessly enable JIT over local network, without manually interacting with Xcode every single time.
+
 ## Why does AutoJIT exist?
 - iOS 17 nerfed previous popular methods of enabling JIT in two crippling ways:
  1. No longer works on Windows
  2. No longer works over local network
 - Xcode has a method of enabling JIT wirelessly; albeit still requiring manual interaction with the Mac on every activation
+
 ## What does AutoJIT do to solve these issues?
 - AutoJIT only addresses problem #2
 - It uses a UI automation tool (AppleScript) to manually interact with the UI
 - It can trigger this script wirelessly from your iOS device by activating a shortcut that runs a command on the Mac using the SSH action
+
 ## Why AppleScript?
 - Trust me, this wasn't my first choice
 - Xcode has some CLI commands, but the only way to enable JIT wirelessly over CLI (from what I could find online at least) required terminal commands executed on the iOS device itself (not possible without a jailbroken device)
 - I'm gonna ditch AppleScript as soon as I find a viable alternative
+
 ## What apps support AutoJIT?
 - It looks like it works with pretty much all apps that use JIT
 - I haven't tested all of them, but all the ones I've tested worked perfectly.
 - Apps tested: Sudachi, Limon, DolphiniOS, PojavLauncher, Ignited
+
 ## How do I add more apps?
 - Edit the shortcut
 - Add new item to the menu (name this whatever you'd like)
@@ -26,32 +31,53 @@
 - Add a `Set Variable` (within the new menu item) action, enter `App` as the variable name
 - Select `Input`, then `Select Variable`, then select the text block you just added
 
+
 # Setup
 
-## On your iOS device:
-1. Download `AutoJIT.shortcut` on your iOS device
-2. Edit the shortcut
-3. Add your Mac password in the password field for both SSH actions
-4. Follow the Mac instructions for what to enter in the fields
+## Requirements:
 
-## On your Mac:
-1. Download `Placeholder.xcodeproj` and `AutoJIT.applescript` on your Mac.
-2. Right-click `AutoJIT.applescript`, hold the option key and click **Copy "AutoJIT.applescript" as Pathname** and paste the text somewhere. Enter that text as the value for `path` in the shortcut.
-3. Locate Hostname:
-    - Open Terminal and use the command `hostname` and enter that as the value for `host` in the shortcut.
-4. Locate user:
-    - Open Terminal and use the command `whoami` and enter that as the value for `user` in the shortcut.
-5. Enable SSH:
-    - System Settings > General > Sharing > Turn on Remote Login
+Note: AutoJIT is only really useful for iOS 17, since there are various better alternatives for iOS 16 and below.
+
+- MacOS device (tested on MacOS Sonoma 14.1 with iOS 17.3 beta)
+    - If your Mac does not support MacOS Sonoma, apparently it may still be possible to upgrade to MacOS Sonoma through a patcher, but be careful if you choose to do that.
+- XCode (tested on Xcode 15.2)
+- iOS SDK (tested on with iOS 17.2 SDK)
+  
+To find out what MacOS version, Xcode version, and iOS SDK version you need, check out the [minimum requirements for Xcode.](https://developer.apple.com/support/xcode/)
+
+## MacOS Device:
+1. Enable SSH:
+   - System Settings > General > Sharing > Turn on Remote Login
+2. AppleScript permissions:
+   - System Settings > Security & Privacy > Privacy > Accessibility > Toggle on AEServer.
+3. Clone or download `AutoJIT` as a zip file on your Mac.
+4. Extract the zip file at a location of your choice.
+
+## iOS Device:
+1. Download `AutoJIT.shortcut` on your iOS device
+2. Run the shortcut
+3. Answer the questions:
+   1. Enter the path to the `AutoJIT` folder on your Mac
+      - To get the path, right-click the `AutoJIT` folder, hold the option key and click **Copy "AutoJIT" as Pathname** and paste the text somewhere.
+   2. Enter the hostname or local IP of your Mac
+      - To find this, open Terminal and use the command `hostname`
+      - Alternatively, you can use the local IP address of your Mac, which you can find in `System Settings > Wi-Fi > (Your Wi-Fi Network) Details... > IP Address`
+   3. Enter the username of your Mac
+      - To find this, open Terminal and use the command `whoami` and use that for the third question.
+   4. Enter "Yes" if you want to save your password. Otherwise, enter "No" and you will be prompted for your password every time you run the shortcut.
+      - Note: Your password is stored in plain text in the `AutoJIT` shortcut, so be careful with this option.
+   5. Enter your password if you chose to save it in the previous question. Otherwise, leave it blank.
+   6. Enter "Yes" if you want sound to play when JIT is enabled. Otherwise, enter "No".
 
 
 ## Open `Placeholder.xcodeproj`
 - If it prompts you to trust the project, click `Trust`
 - This is just a placeholder project so that we can attach the debugger to the app.
-- You could create your own empty project, but this might be easier.
+- Alternatively, you can create your own empty project. Just make sure it's an iOS project (labelled "App" in Xcode when creating a new project)
+
 ## Download iOS SDK:
 1. Xcode > Settings... > iOS 17.x (7.35gb)
-    - Select whatever version your device is running.
+    - Select the version that matches your iOS version, or the latest version if your version is newer than the latest SDK.
     - When installing Xcode for the first time, you can specify to download the iOS SDK.
 
 2. Plug in your device to your Mac, open Finder and select your device under Locations. Scroll down to Options and make sure to enable **Show this iPhone when on Wi-Fi**
@@ -66,9 +92,8 @@ Test out the shortcut. You can add it to your Home Screen as an app with a custo
 # Troubleshooting
 
 ## JIT not enabled and Xcode displaying "Waiting to Attach...."
-- This usually occurs when we try to open the app before it's ready.
-- This should fix itself by running the shortcut again
-- If this issue happens consistently for you, try increasing the delay in the first `wait` action in the shortcut by 1-5 seconds.
+- This usually happens when the app has been open in the background for a little while.
+- This can be fixed by killing and reopening the app.
 
 ## Enabling JIT for Limon asks me to select an app
 - This occurs because `Limón` got renamed to `Limon` for some reason recently.
