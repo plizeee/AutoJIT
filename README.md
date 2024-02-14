@@ -72,8 +72,8 @@ To find out what MacOS version, Xcode version, and iOS SDK version you need, che
 
 ## Open `Placeholder.xcodeproj`
 - If it prompts you to trust the project, click `Trust`
-- This is just a placeholder project so that we can attach the debugger to the app.
-- Alternatively, you can create your own empty project. Just make sure it's an iOS project (labelled "App" in Xcode when creating a new project)
+- This is just a placeholder project so that we can attach the debugger to the app. You can create your own empty project, if want to. Just make sure it's an iOS project (labelled "App" in Xcode when creating a new project)
+- At the top of of the sidebar, select the tab icon that appears as a little spray can.
 
 ## Download iOS SDK:
 1. Xcode > Settings... > iOS 17.x (7.35gb)
