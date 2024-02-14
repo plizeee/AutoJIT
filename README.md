@@ -71,8 +71,8 @@ To find out what MacOS version, Xcode version, and iOS SDK version you need, che
 
 
 ## Open `Placeholder.xcodeproj`
+- This is just a placeholder project so that we can attach the debugger to the app. You can create your own empty project instead if want to. Just make sure it's an iOS project (labelled "App" in Xcode when creating a new project)
 - If it prompts you to trust the project, click `Trust`
-- This is just a placeholder project so that we can attach the debugger to the app. You can create your own empty project, if want to. Just make sure it's an iOS project (labelled "App" in Xcode when creating a new project)
 - At the top of of the sidebar, select the tab icon that appears as a little spray can.
 
 ## Download iOS SDK:
@@ -109,6 +109,10 @@ Test out the shortcut. You can add it to your Home Screen as an app with a custo
 ## AutoJIT.applescript execution error: System Events got an error: Can't get window 1 of process "Xcode". Invalid index
 - This seems to happen when Xcode is not the active window.
 - This can probably be fixed fairly easily soon, but for now, just make sure Xcode is the active window when you run, if you get this error.
+
+## execution error: Can't make «class valL» of item 1 of {} into type text. (-1700) (1)
+- This likely means you don't have the correct tab selected in the left sidebar of Xcode. Make sure you have the tab icon that looks like a little spray can selected.
+- The selected tab should remain the same unless you change it, but I'll look into a way to automate this in the future.
 
 ## Phone cannot leave the app
 - This can usually be fixed by manually detaching the debugger from the app (Xcode > Debug > Detach from [process name])
