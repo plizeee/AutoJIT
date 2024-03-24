@@ -22,7 +22,7 @@
 ## What apps support AutoJIT?
 - It looks like it works with pretty much all apps that use JIT
 - I haven't tested all of them, but all the ones I've tested worked perfectly.
-- Apps tested: Sudachi, Limon, DolphiniOS, PojavLauncher, Ignited
+- Apps tested: Sudachi, Limon, DolphiniOS, PojavLauncher, Ignited, Folium
 
 ## How do I add more apps?
 - Edit the shortcut
